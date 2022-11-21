@@ -44,6 +44,7 @@
 					// return the price as a decimal number with 2 decimal places
 					return Math.round(fBillTotal * 100.0) / 100.0;
 				};
+
 				// This function either turns on or off the row highlighting for decaf
 				// items (depending on the value of bShowDecaf)
 				function highlightDecaf(idTable, bShowDecaf) {
@@ -65,6 +66,7 @@
 						};
 					};
 				};
+
 				// Utility function for getting the parent tag of a given tag
 				// but only of a certain type (i.e. a TR, a TABLE, etc.)
 				function getParentTag(oNode, sParentType) {
