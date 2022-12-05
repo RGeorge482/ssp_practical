@@ -5,9 +5,6 @@
 		<table id="menuTable" border="1" class="indent">
 			<thead>
 				<tr>
-					<th colspan="3">Roastmoreland 30-34 Menu</th>
-				</tr>
-				<tr>
 					<th>Select</th>
 					<th>Item</th>
 					<th>Price</th>
