@@ -9,7 +9,7 @@ const   http = require('http'), //HTTP server
         server = http.createServer(router); //Init our server
         
         router.use(express.static(path.resolve(__dirname,'views')));
-        router.use(express.urlencoded({extended: ture}));
+        router.use(express.urlencoded({extended: true}));
         router.use(express.json());
 
 function XMLtoJSON(filename, cb){
@@ -48,7 +48,7 @@ router.post('/post/json', function(req, res){
         console.log(obj);
         XMLtoJSON('menu.xml', function(err, result) {
             if (err) throw (err);
-            result.menu.category[obj.sec_n].item,push({'listing': obj.listing, 'price': obj.price});
+            result.menu.category[obj.sec_n].item.push({'listing': obj.listing, 'price': obj.price});
             console.log(JSON.stringify(result, null, " "));
             JSONtoXML('menu.xml', result, function(err){
                 if (err) console.log(err);
@@ -60,6 +60,25 @@ router.post('/post/json', function(req, res){
 
     res.redirect('back');
 });
+
+router.post('/post/delete', function (req,res) {
+    function deleteJSON(obj) {
+        console.log(obj);
+        XMLtoJSON('menu.xml', function(err, result){
+            if (err) throw (err);
+
+            delete result.menu.category[obj.section].item[obj.entree];
+
+            JSONtoXML('menu.xml', result, function(err){
+                if (err) console.log(err);
+            });
+        });
+    };
+
+    deleteJSON(req.body);
+
+    res.redirect('back');
+})
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {
     const addr = server.address();
